@@ -7,23 +7,22 @@ function App() {
   const [todo, setTodo] = useState([]);
 
   const addClickHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     
 
-    const newTodo = [
-      {
+    const newTodo = {
         id: Date.now(),
         title: title,
         contents: contents,
         isDone: false,
-      },
-    ]
+      };
+
 
     setTodo([...todo, newTodo]);
 
-    setTitle("")
-    setcontens("")
+    // setTitle("")
+    // setcontens("")
   }
 
   const titleInputHandler = (e) => {
@@ -62,13 +61,13 @@ function App() {
         <h1>할일 목록</h1>
   
             {todo
-            .map(item => {
+            .map(todo => {
               return (
-              <div key={item.id}>
-                <p>{item.id}</p>
-                <p>{item.title}</p>
-                <p>{item.contents}</p>
-                <p>{item.isDone}</p>
+              <div key={todo.id}>
+                <p>{todo.id}</p>
+                <p>{todo.title}</p>
+                <p>{todo.contents}</p>
+                <p>{todo.isDone}</p>
               </div>
             )
             })}
