@@ -1,82 +1,34 @@
 import './App.css';
-import React, { useState} from 'react';
+import React, { useState } from 'react';
+import Input from './Component/Input';
+import TodoList from './Component/TodoList';
+// 경로에서 파일명이 없을 때 index를 default로 찾아간다
+// jsx파일 이름 변경 후 import 선언한 파일 저장 진행
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [contents, setcontens] = useState("");
-  const [todo, setTodo] = useState([]);
-
-  const addClickHandler = (e) => {
-    e.preventDefault();
-
-    
-
-    const newTodo = {
-        id: Date.now(),
-        title: title,
-        contents: contents,
-        isDone: false,
-      };
-
-
-    setTodo([...todo, newTodo]);
-
-    // setTitle("")
-    // setcontens("")
-  }
-
-  const titleInputHandler = (e) => {
-    setTitle(e.target.value)
-  }
-
-  const constensInputHandler = (e) => {
-    setcontens(e.target.value)
-  }
-
-  console.log(todo)
+  // useState 값이 배열이기에 todos로 명명해주는 것이 오해의 소지를 줄일 수 있다
+  const [todos, setTodos] = useState([]);
 
   return (
     <div className="out_line">
       <header>
-        <form>
-          <div>
-            <p>제목</p>
-            <input
-              value={title}
-              onChange={titleInputHandler}
-            />
-          </div>
-          <div>
-            <p>내용</p>
-            <input
-              value={contents}
-              onChange={constensInputHandler}
-            />
-          </div>
-          <button onClick={addClickHandler}>추가하기</button>
-        </form>
+        <Input
+          key={"Input"}
+          todos={todos}
+          setTodos={setTodos}
+        />
       </header>
       <footer>
-        <div>
-        <h1>할일 목록</h1>
-  
-            {todo
-            .map(todo => {
-              return (
-              <div key={todo.id}>
-                <p>{todo.id}</p>
-                <p>{todo.title}</p>
-                <p>{todo.contents}</p>
-                <p>{todo.isDone}</p>
-              </div>
-            )
-            })}
-
-        <h1>완료 목록</h1>
-        <div>
-
-        </div>
-        </div>
+          <TodoList
+            todos={todos}
+            setTodos={setTodos}
+            listIsDone={false}
+          />
+          <TodoList
+            todos={todos}
+            setTodos={setTodos}
+            listIsDone={true}
+          />
       </footer>
     </div>
   )
